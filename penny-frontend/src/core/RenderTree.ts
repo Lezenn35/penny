@@ -27,9 +27,8 @@ export default class RenderTree {
     }
 
     render(ctx: CanvasRenderingContext2D) {
-        if (this.isLeaf()) {
-            this._node.render(ctx);
-        } else {
+        this._node.render(ctx);
+        if (!this.isLeaf()) {
             this._children.forEach((child) => child.render(ctx));
         }
     }

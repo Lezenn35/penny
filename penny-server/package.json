@@ -9,6 +9,9 @@
   },
   "devDependencies": {
     "typescript": "^4.5.4",
-    "vite": "^2.9.5"
+    "vite": "^2.9.5",
+    "fastify": "^3.28.0",
+    "fastify-websocket": "^4.2.2",
+    "@types/ws": "^8.5.3"
   }
 }

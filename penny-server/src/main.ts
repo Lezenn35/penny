@@ -1,8 +1,19 @@
-import './style.css'
+import fastify from "fastify";
+import fastify_websocket from "fastify-websocket";
 
-const app = document.querySelector<HTMLDivElement>('#app')!
+const server = fastify();
+server.register(fastify_websocket);
 
-app.innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
+server.get('/', { websocket: true }, (connection, request) => {
+    connection.socket.on('message', (message) => {
+        console.log(message);
+        connection.socket.send('Received: ' + message);
+    })
+});
+
+server.listen(3001, err => {
+    if (err) {
+        server.log.error(err);
+        process.exit(1);
+    }
+})
