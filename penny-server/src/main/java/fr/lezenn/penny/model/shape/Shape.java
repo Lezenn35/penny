@@ -1,5 +1,7 @@
 package fr.lezenn.penny.model.shape;
 
+import fr.lezenn.penny.model.maths.Vector2d;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +33,29 @@ public class Shape {
      */
     public void connexize() {
 
+    }
+
+    public boolean containsPoint(Point point) {
+        var nbPoints = this.points.size();
+        var count = 0;
+
+        for (int i = 0; i < nbPoints - 1; i++) {
+            var segPointA = this.points.get(i).toVector2d();
+            var segPointB = this.points.get(i + 1).toVector2d();
+
+            double x1 = segPointA.getX(),
+                    y1 = segPointA.getY(),
+                    x2 = segPointB.getX(),
+                    y2 = segPointB.getY();
+
+            if (
+                    point.getY() < y1 != point.getY() < y2
+                    && point.getX() < (x2 - x1) * (point.getY() - y1) / (y2 - y1) + x1
+            ) {
+                count++;
+            }
+        }
+
+        return count % 2 == 0;
     }
 }
