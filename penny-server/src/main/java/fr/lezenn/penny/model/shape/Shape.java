@@ -39,9 +39,19 @@ public class Shape {
         var nbPoints = this.points.size();
         var count = 0;
 
-        for (int i = 0; i < nbPoints - 1; i++) {
+        if (nbPoints < 3) {
+            return false;
+        }
+
+        for (int i = 0; i < nbPoints; i++) {
             var segPointA = this.points.get(i).toVector2d();
-            var segPointB = this.points.get(i + 1).toVector2d();
+            Vector2d segPointB;
+
+            if (i < nbPoints - 1) {
+                segPointB = this.points.get(i + 1).toVector2d();
+            } else {
+                segPointB = this.points.get(0).toVector2d();
+            }
 
             double x1 = segPointA.getX(),
                     y1 = segPointA.getY(),
@@ -49,13 +59,18 @@ public class Shape {
                     y2 = segPointB.getY();
 
             if (
-                    point.getY() < y1 != point.getY() < y2
-                    && point.getX() < (x2 - x1) * (point.getY() - y1) / (y2 - y1) + x1
+
+                    point.getY() <= y1 != point.getY() <= y2
+                    && point.getX() <= (x2 - x1) * (point.getY() - y1) / (y2 - y1) + x1
             ) {
                 count++;
             }
         }
 
-        return count % 2 == 0;
+        return count % 2 != 0;
+    }
+
+    public List<Point> getPoints() {
+        return this.points;
     }
 }
