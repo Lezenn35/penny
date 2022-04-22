@@ -1,4 +1,4 @@
-package fr.lezenn.penny.model;
+package fr.lezenn.penny.model.player;
 
 public class Player {
 
