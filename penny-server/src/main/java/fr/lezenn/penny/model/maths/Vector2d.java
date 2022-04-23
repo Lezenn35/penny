@@ -1,9 +1,16 @@
 package fr.lezenn.penny.model.maths;
 
+import java.util.Objects;
+
 /**
  * Vector of two double components
  */
 public class Vector2d {
+
+    public static final Vector2d UP = new Vector2d(0, 1);
+    public static final Vector2d LEFT = new Vector2d(1, 0);
+    public static final Vector2d DOWN = new Vector2d(0, -1);
+    public static final Vector2d RIGHT = new Vector2d(-1, 0);
 
     private double x;
     private double y;
@@ -96,11 +103,43 @@ public class Vector2d {
         return Math.acos((this.dot(other)));
     }
 
+    /**
+     * Rotates the vector from the given angle.
+     * @param angle Angle in degree
+     */
+    public void rotateDeg(double angle) {
+        angle = angle * (Math.PI / 180.0);
+        this.rotateRad(angle);
+    }
+
+    /**
+     * Rotates the vector from the given angle.
+     * @param angle Angle in radian
+     */
+    public void rotateRad(double angle) {
+        var x = Math.cos(angle) * this.x - Math.sin(angle) * this.y;
+        this.y = Math.sin(angle) * this.x + Math.cos(angle) * this.y;
+        this.x = x;
+    }
+
     public double getX() {
         return x;
     }
 
     public double getY() {
         return y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector2d vector2d = (Vector2d) o;
+        return Double.compare(vector2d.x, x) == 0 && Double.compare(vector2d.y, y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

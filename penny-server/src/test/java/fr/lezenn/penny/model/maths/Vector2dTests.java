@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 
 public class Vector2dTests {
 
-    private static final double DELTA = 0.000001;
+    private static final double DELTA = 0.0001;
 
     @Test
     public void nullVectorTest() {
@@ -112,5 +112,41 @@ public class Vector2dTests {
         var angle = v1.angleBetween(v2);
 
         Assertions.assertEquals(0, angle, DELTA);
+    }
+
+    @Test
+    public void rotateAngle90Deg() {
+        var vector = new Vector2d(1, 0);
+        vector.rotateDeg(90);
+
+        Assertions.assertEquals(0, vector.getX(), DELTA);
+        Assertions.assertEquals(1, vector.getY(), DELTA);
+    }
+
+    @Test
+    public void rotateAngleMinus90Deg() {
+        var vector = new Vector2d(1, 0);
+        vector.rotateDeg(-90);
+
+        Assertions.assertEquals(0, vector.getX(), DELTA);
+        Assertions.assertEquals(-1, vector.getY(), DELTA);
+    }
+
+    @Test
+    public void rotateAngle90Rad() {
+        var vector = new Vector2d(1, 0);
+        vector.rotateRad(Math.PI / 2);
+
+        Assertions.assertEquals(0, vector.getX(), DELTA);
+        Assertions.assertEquals(1, vector.getY(), DELTA);
+    }
+
+    @Test
+    public void rotateAngleMinus90Rad() {
+        var vector = new Vector2d(1, 0);
+        vector.rotateRad(-Math.PI / 2);
+
+        Assertions.assertEquals(0, vector.getX(), DELTA);
+        Assertions.assertEquals(-1, vector.getY(), DELTA);
     }
 }
