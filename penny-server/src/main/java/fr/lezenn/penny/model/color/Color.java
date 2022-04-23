@@ -1,5 +1,7 @@
 package fr.lezenn.penny.model.color;
 
+import java.util.Objects;
+
 /**
  * Color representation and computation
  */
@@ -97,5 +99,18 @@ public class Color {
 
     public int getGreen() {
         return green;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Color color = (Color) o;
+        return red == color.red && blue == color.blue && green == color.green;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(red, blue, green);
     }
 }
