@@ -2,6 +2,7 @@ package fr.lezenn.penny.model.player;
 
 import fr.lezenn.penny.model.color.Color;
 import fr.lezenn.penny.model.maths.Vector2d;
+import fr.lezenn.penny.model.shape.Shape;
 
 import java.util.Objects;
 
@@ -14,11 +15,14 @@ public class Player {
     private Vector2d position;
     private Vector2d orientation;
 
+    private final Shape shape;
+
     public Player(String name, Color color, Vector2d position, Vector2d orientation) {
         this.name = name;
         this.color = color;
         this.orientation = orientation;
         this.position = position;
+        this.shape = new Shape();
     }
 
     /**
@@ -66,6 +70,10 @@ public class Player {
 
     public void setOrientation(Vector2d orientation) {
         this.orientation = orientation;
+    }
+
+    public Shape getShape() {
+        return shape;
     }
 
     @Override

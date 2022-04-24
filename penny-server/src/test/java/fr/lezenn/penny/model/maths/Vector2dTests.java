@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 
 public class Vector2dTests {
 
-    private static final double DELTA = 0.0001;
+    private static final double DELTA = 0.00001;
 
     @Test
     public void nullVectorTest() {
@@ -148,5 +148,14 @@ public class Vector2dTests {
 
         Assertions.assertEquals(0, vector.getX(), DELTA);
         Assertions.assertEquals(-1, vector.getY(), DELTA);
+    }
+
+    @Test
+    public void vectorDistanceTest() {
+        var v1 = new Vector2d();
+        var v2 = new Vector2d(15, 0);
+
+        Assertions.assertEquals(15.0, v1.distance(v2), DELTA);
+        Assertions.assertEquals(15.0, v2.distance(v1), DELTA);
     }
 }

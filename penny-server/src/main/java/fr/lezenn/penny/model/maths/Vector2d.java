@@ -122,6 +122,14 @@ public class Vector2d {
         this.x = x;
     }
 
+    /**
+     * Computes the distance between two Vector2d assimiled as points in a plan
+     * @param other Other vector (or point)
+     * @return The distance between the two points
+     */
+    public double distance(Vector2d other) {
+        return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2));
+    }
     public double getX() {
         return x;
     }
